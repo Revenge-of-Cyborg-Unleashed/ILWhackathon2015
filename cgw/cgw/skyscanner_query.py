@@ -53,7 +53,7 @@ class SkyscannerQuery(object):
         # convert date string into a datetime object
         departure_date = datetime.datetime.strptime(quote['OutboundLeg']['DepartureDate'], '%Y-%m-%dT%H:%M:%S')
 
-        # for the outbound leg:
+        # for the inbound leg:
         # put names to origin and destination IDs
         inbound_origin_id = quote['InboundLeg']['OriginId']
         inbound_origin_name = next(place['Name'] for place in self.results['Places'] if place['PlaceId'] == inbound_origin_id)
