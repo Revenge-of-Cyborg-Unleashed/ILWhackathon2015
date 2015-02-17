@@ -9,6 +9,7 @@ function changeColor(color) {
 	var y = document.getElementById("first cell");
     color(cell, color);
 }
+
 </script>
 </head>
 <body>

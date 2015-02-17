@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="bootstrap.min.css">
 	<script src="jquery.min.js"></script>
-	<script src="boot.js"></script>
 	<script src="bootstrap.min.js"></script>
 	<style type="text/css">
     body{
@@ -45,7 +44,7 @@
 		font-size: 15px;
 	}
 
-
+</script> 
 </style>
 </head>
 <body>
@@ -63,7 +62,7 @@
   <p>Choose your preferences by ticking the box. Note: if you choose maybe ...Please choose as many options as you like and be happy!</p>
   
   <div class="polltable">
-    <table width = "100%" border="1">
+    <table width = "100%" border="1" id = "pollTable">
             <tr>
                 <td><h3> First Name </h3></td>
                 <td><h3> Last Name </h3></td>
@@ -77,162 +76,173 @@
                 <td>John</td>
                 <td>Carter</td>
                 <td>johncarter@mail.com</td>
-				<td><div class = "first cell">
-						<div class="row-xs-1 row-md-1" style="background-color:#CAFF70;" id = "firstYes">
+				<td><div class = "firstCell" id = 'first'>
+						<div class="row-xs-1 row-md-1">
 							<div class="input-group">
-								<input type="checkbox" onClick="changeColor('#000099')">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('first').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 								Yes</div></div>
-						<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5; id = "firstMaybe">
+						<div class="row-xs-1 row-md-1">
 							<div class="input-group">
-								<input type="checkbox" onchange="changeColor()">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('first').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 								Maybe</div></div>
-						<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+						<div class="row-xs-1 row-md-1" >
 							<div class="input-group">
-								<input type="checkbox">
-								No</div></div></td></th></div>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('first').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+								No</div></div></td></div>
+				<td><div class = "secondCell" id = 'second' >
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox" >
+							<input type="radio" name="radioButton2" onclick="document.getElementById('second').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton2" onclick="document.getElementById('second').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+							<input type="radio" name="radioButton2" onclick="document.getElementById('second').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
+				<td><div class = "thirdCell" id = 'third'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton3" onclick="document.getElementById('third').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton3" onclick="document.getElementById('third').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+							<input type="radio" name="radioButton3" onclick="document.getElementById('third').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
+				<td><div class = "fourthCell" id = 'fourth'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton4" onclick="document.getElementById('fourth').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton4" onclick="document.getElementById('fourth').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
+							<input type="radio" name="radioButton4" onclick="document.getElementById('fourth').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
             </tr>
 			<tr>
                 <td>Peter</td>
                 <td>Parker</td>
                 <td>peterparker@mail.com</td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+				<td><div class = "fifthCell" id = 'fifth'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton5" onclick="document.getElementById('fifth').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton5" onclick="document.getElementById('fifth').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+							<input type="radio" name="radioButton5" onclick="document.getElementById('fifth').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
+				<td><div class = "sixthCell" id = 'sixth'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton6" onclick="document.getElementById('sixth').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton6" onclick="document.getElementById('sixth').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+							<input type="radio" name="radioButton6" onclick="document.getElementById('sixth').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
+				<td><div class = "7thCell" id = '7'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton7" onclick="document.getElementById('7').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton7" onclick="document.getElementById('7').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+							<input type="radio" name="radioButton7" onclick="document.getElementById('7').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
+				<td><div class = "8thCell" id = '8'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton8" onclick="document.getElementById('8').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton8"  onclick="document.getElementById('8').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
+							<input type="radio" name="radioButton8" onclick="document.getElementById('8').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
             </tr>
 			<tr>
                 <td>John</td>
                 <td>Rambo</td>
                 <td>johnrambo@mail.com</td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+				<td><div class = "9thCell" id = '9'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton9" onclick="document.getElementById('9').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton9" onclick="document.getElementById('9').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+							<input type="radio" name="radioButton9" onclick="document.getElementById('9').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
+				<td><div class = "10thCell" id = '10'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton10" onclick="document.getElementById('10').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton10" onclick="document.getElementById('10').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+							<input type="radio" name="radioButton10" onclick="document.getElementById('10').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
+				<td><div class = "11thCell" id = '11'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton11" onclick="document.getElementById('11').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton11" onclick="document.getElementById('11').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
-				<td><div class="row-xs-1 row-md-1" style="background-color:#CAFF70;">
+							<input type="radio" name="radioButton11" onclick="document.getElementById('11').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
+				<td><div class = "12thCell" id = '12'>
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton12" onclick="document.getElementById('12').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 							Yes</div></div>
-					<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
+							<input type="radio" name="radioButton12"  onclick="document.getElementById('12').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 							Maybe</div></div>
-					<div class="row-xs-1 row-md-1" 	style="background-color:#FF6347;">
+					<div class="row-xs-1 row-md-1" >
 						<div class="input-group">
-							<input type="checkbox">
-							No</div></div></td>
-            </tr>
+							<input type="radio" name="radioButton12" onclick="document.getElementById('12').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+							No</div></div></td></div>
+				 </tr>
         </tbody>
     </table>
 </div>
