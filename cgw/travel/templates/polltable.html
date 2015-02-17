@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Name of this site</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load staticfiles %}
+	<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+	<script src="{% static "jquery.min.js" %}"></script>
+	<script src="{% static "js/boot.js" %}"></script>
+	<script src="{% static "js/bootstrap.min.js" %}"></script>
+	<style type="text/css">
+    body{
+    padding-top: 70px;
+		margin:0;
+		padding:0;
+    }
+    p{
+        padding: 50px;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        background: #8EE5EE;
+
+    }
+	h1{
+	    padding: 100pxpx;
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+        background: #7AC5CD;
+	}
+
+	h2{
+		font-size: 12px;
+		text-align: centre;
+
+	}
+	.polltable{
+        background: #B2DFEE;
+		text-align: left;
+	}
+	h3{
+		text-align:left;
+		font-weight: bold;
+		font-size: 15px;
+	}
+
+
+</style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+  <h1>Schedule and book your group trip</h1>
+  <p>To schedule your group trip choose the flights that suit you personally the best. We try to make sure... Once everyone has voted, you will get a link to begin the booking process for the flight that suited everyone, if, however, there will not be a flight that suited everyone, you will get another link with different options.</p>
+</div>
+
+<div class="container-fluid">
+  <h1>Please vote below!</h1>
+  <script src="jquery.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <p>Choose your preferences by ticking the box. Note: if you choose maybe ...Please choose as many options as you like and be happy!</p>
+
+  <div class="polltable">
+    <table width = "100%" border="1">
+            <tr>
+                <td><h3> First Name </h3></td>
+                <td><h3> Last Name </h3></td>
+                <td><h3> Email </h3></td>
+				{% for flight in flights %}
+        <td><h3> {{ flight }}</h3></td>
+				{% endfor %}
+            </tr>
+            {% for person in people %}
+            <tr>
+                <td>{{ person.fname }}</td>
+                <td>{{ person.lname }}</td>
+                <td>{{ person.email }}</td>
+                {% for flight in flights %}
+                <td>
+                  <div class = "first cell" id = "{{ person.email + flight }}">
+						      <div class="row-xs-1 row-md-1" >
+							    <div class="input-group">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
+								Yes</div></div>
+						<div class="row-xs-1 row-md-1">
+							<div class="input-group">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
+								Maybe</div></div>
+						<div class="row-xs-1 row-md-1">
+							<div class="input-group">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('first').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+								No</div></div></div></td>
+                {% endfor%}
+              </tr>
+              {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+<br>
+<div class="submitButton">
+                <button type="button" class="btn btn-primary btn-block btn-sm">
+                    Submit</button>
+            </div>
+  <div class="row">
+		<div class="col-xs-12">
+			<footer>
+				<h2>&copy; Copyright 2015</h2>
+			</footer>
+		</div>
+	</div>
+</div>
+</body>
+</html>
