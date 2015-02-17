@@ -12,8 +12,8 @@ class Person(models.Model):
 	group_id = models.ForeignKey(Group)
 
 class Quote(models.Model):
-	in_carrier = models.CharField(max_length=30)
 	out_carrier = models.CharField(max_length=30)
+	in_carrier = models.CharField(max_length=30)
 	dep_date = models.DateTimeField('departure date')
 	ret_date = models.DateTimeField('return date')
 	direct = models.BooleanField(default=False)
