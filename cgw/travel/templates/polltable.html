@@ -80,18 +80,18 @@
                 <td>{{ person.email }}</td>
                 {% for flight in flights %}
                 <td>
-                  <div class = "first cell">
-						      <div class="row-xs-1 row-md-1" style="background-color:#CAFF70;" id = "firstYes">
+                  <div class = "first cell" id = "{{ person.email + flight }}">
+						      <div class="row-xs-1 row-md-1" >
 							    <div class="input-group">
-								<input type="checkbox" onClick="changeColor('#000099')">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 								Yes</div></div>
-						<div class="row-xs-1 row-md-1" style="background-color:#FFF0F5;" id = "firstMaybe">
+						<div class="row-xs-1 row-md-1">
 							<div class="input-group">
-								<input type="checkbox" onchange="changeColor()">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 								Maybe</div></div>
-						<div class="row-xs-1 row-md-1" style="background-color:#FF6347;">
+						<div class="row-xs-1 row-md-1">
 							<div class="input-group">
-								<input type="checkbox">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('first').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
 								No</div></div></div></td>
                 {% endfor%}
               </tr>
