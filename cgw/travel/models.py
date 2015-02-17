@@ -2,8 +2,8 @@ from django.db import models
 import datetime
 
 class Group(models.Model):
-	salt = models.CharField(max_length=50)
-	name = models.CharField(max_length=50)
+	salt = models.CharField(max_length=50, default='')
+	name = models.CharField(max_length=50, default='')
 
 class Person(models.Model):
 	name = models.CharField(max_length=50)
