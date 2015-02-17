@@ -8,7 +8,11 @@ class PersonAdmin(admin.ModelAdmin):
 	fields = ['group_id','name','email','decided']
 
 class QuoteAdmin(admin.ModelAdmin):
-	fields = ['group_id','score','price','direct','origin','dep_date','out_carrier','destination','ret_date','in_carrier']
+	fieldsets = [
+		(None, {'fields': ['group_id','score','price','direct']}),
+		('Outbound Leg', {'fields': ['out_origin', 'out_destination','dep_date','out_carrier']}),
+		('Inbound Leg', {'fields': ['in_origin','in_destination','ret_date','in_carrier']}),
+	]
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Person, PersonAdmin)
