@@ -18,5 +18,5 @@ class Quote(models.Model):
 	origin = models.CharField(max_length=30)
 	destination = models.CharField(max_length=30)
 	price = models.IntegerField(default=0)
-	passengers = models.IntegerField(default=0)
+	#passengers = models.IntegerField(default=0)
 	group_id = models.ForeignKey(Group)	
