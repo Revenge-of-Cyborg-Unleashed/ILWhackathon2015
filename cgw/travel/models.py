@@ -7,6 +7,7 @@ class Group(models.Model):
 class Person(models.Model):
 	name = models.CharField(max_length=50)
 	email = models.CharField(max_length=50)
+	decided = models.BooleanField(default=False)
 	group_id = models.ForeignKey(Group)
 
 class Quote(models.Model):
@@ -19,4 +20,5 @@ class Quote(models.Model):
 	destination = models.CharField(max_length=30)
 	price = models.IntegerField(default=0)
 	#passengers = models.IntegerField(default=0)
-	group_id = models.ForeignKey(Group)	
+	group_id = models.ForeignKey(Group)
+	score = models.IntegerField(default=0)	
