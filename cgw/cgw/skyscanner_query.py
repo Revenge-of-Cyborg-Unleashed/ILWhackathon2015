@@ -1,7 +1,6 @@
 import requests
-import json
 import datetime
-import copy
+import json
 
 
 class SkyscannerQuery(object):
@@ -31,7 +30,13 @@ class SkyscannerQuery(object):
                               self.inbound_partial_date, self.api_key)
 
         response = requests.get(request_url) # returns JSON string of quote data
-        return json.loads(response.text)
+        return response.json()
+
+    def getSortedQuotes(self):
+        """Returns array of quotes sorted by price"""
+
+        quotes = self.queryBrowseCache()['Quotes']
+        return sorted(quotes, key=lambda quote: quote['MinPrice'])
 
     def formatQuote(self, quote):
         """Converts individual quotes to a more usable format, converting IDs to names and dates to datetime objects"""
@@ -47,8 +52,8 @@ class SkyscannerQuery(object):
         # put names to each carrier ID in the list
         outbound_carrier_names = []
         for carrier_id in quote['OutboundLeg']['CarrierIds']:
-          name = next(place['Name'] for place in self.results['Carriers'] if place['CarrierId'] == carrier_id)
-          outbound_carrier_names.append(name)
+            name = next(place['Name'] for place in self.results['Carriers'] if place['CarrierId'] == carrier_id)
+            outbound_carrier_names.append(name)
 
         # convert date string into a datetime object
         departure_date = datetime.datetime.strptime(quote['OutboundLeg']['DepartureDate'], '%Y-%m-%dT%H:%M:%S')
@@ -64,23 +69,18 @@ class SkyscannerQuery(object):
         # put names to each carrier ID in the list
         inbound_carrier_names = []
         for carrier_id in quote['InboundLeg']['CarrierIds']:
-          name = next(place['Name'] for place in self.results['Carriers'] if place['CarrierId'] == carrier_id)
-          inbound_carrier_names.append(name)
+            name = next(place['Name'] for place in self.results['Carriers'] if place['CarrierId'] == carrier_id)
+            inbound_carrier_names.append(name)
 
         # convert date string into a datetime object
         return_date = datetime.datetime.strptime(quote['InboundLeg']['DepartureDate'], '%Y-%m-%dT%H:%M:%S')
 
-        return {'QuoteId': quote['QuoteId'], 'OutboundLeg': {'OriginName': outbound_origin_name, 'CarrierIds': outbound_carrier_names,
+        return {'QuoteId': quote['QuoteId'], 'OutboundLeg': {'OriginName': outbound_origin_name, 'CarrierNames': outbound_carrier_names,
                 'DepartureDate': departure_date, 'DestinationName': outbound_destination_name},
-                'MinPrice': quote['MinPrice'], 'InboundLeg': {'OriginId': inbound_origin_name, 'CarrierIds': inbound_carrier_names,
+                'MinPrice': quote['MinPrice'], 'InboundLeg': {'OriginName': inbound_origin_name, 'CarrierNames': inbound_carrier_names,
                 'DepartureDate': return_date, 'DestinationName': inbound_destination_name},
                 'Direct': quote['Direct']}
 
-    def getSortedQuotes(self):
-      """Returns array of quotes sorted by price"""
-
-        quotes = self.queryBrowseCache()['Quotes']
-        return sorted(quotes, key=lambda quote: quote['MinPrice'])
 
 # a query with the bare minimum of information
-# ssq = SkyscannerQuery('UK', 'GBP', 'En-GB', 'UK')
+# ssq = SkyscannerQuery('UK', 'GBP', 'en-GB', 'UK')
