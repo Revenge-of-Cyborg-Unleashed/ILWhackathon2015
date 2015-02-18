@@ -9,9 +9,8 @@
 	<script src="{% static "jquery.min.js" %}"></script>
 	<script src="{% static "js/boot.js" %}"></script>
 	<script src="{% static "js/bootstrap.min.js" %}"></script>
-	<style type="text/css">
+  <style type="text/css">
     body{
-    padding-top: 70px;
 		margin:0;
 		padding:0;
     }
@@ -30,22 +29,18 @@
         text-align: center;
         background: #7AC5CD;
 	}
-
 	h2{
 		font-size: 12px;
-		text-align: centre;
-
-	}
-	.polltable{
-        background: #B2DFEE;
-		text-align: left;
 	}
 	h3{
 		text-align:left;
 		font-weight: bold;
 		font-size: 15px;
 	}
-
+	.pollTable{
+        background: #B2DFEE;
+		text-align: left;
+	}
 
 </style>
 </head>
@@ -63,8 +58,8 @@
   <script src="bootstrap.min.js"></script>
   <p>Choose your preferences by ticking the box. Note: if you choose maybe ...Please choose as many options as you like and be happy!</p>
 
-  <div class="polltable">
-    <table width = "100%" border="1">
+  <div class="pollTable">
+    <table width = "100%" border="1" id = "pollTable" rules = "rows" frame = "hsides">
             <tr>
                 <td><h3> First Name </h3></td>
                 <td><h3> Last Name </h3></td>
@@ -80,18 +75,18 @@
                 <td>{{ person.email }}</td>
                 {% for flight in flights %}
                 <td>
-                  <div class = "first cell" id = "{{ person.email + flight }}">
+                  <div class = "first cell" id = "{{ person.email }}{{ flight }}">
 						      <div class="row-xs-1 row-md-1" >
 							    <div class="input-group">
-								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
+								<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 								Yes</div></div>
 						<div class="row-xs-1 row-md-1">
 							<div class="input-group">
-								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
+								<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 								Maybe</div></div>
 						<div class="row-xs-1 row-md-1">
 							<div class="input-group">
-								<input type="radio" name="radioButton1" onclick="document.getElementById('first').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+								<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
 								No</div></div></div></td>
                 {% endfor%}
               </tr>
