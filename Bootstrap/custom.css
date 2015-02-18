@@ -55,3 +55,11 @@
 		text-align: left;
 	}
 	
+#listOfUsers {
+	width : 100%;
+}
+
+#addUsersButton {
+	float : right;
+}
+

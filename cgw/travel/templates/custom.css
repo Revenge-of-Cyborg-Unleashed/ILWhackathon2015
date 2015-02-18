@@ -2,7 +2,6 @@
 	.mainbit {
 		padding-top: 150px;
 	}
-
 	.bodyBackround {
 		background: #8EE5EE;
 		height: 100%;
@@ -20,7 +19,7 @@
 	.form-control{
 		background: #D1EEEE;
 	}
-	.rowfooter1{
+	.footer1{
 		text-indent: 13px;
 	}
 /* for polltable */
@@ -56,3 +55,11 @@
 		text-align: left;
 	}
 	
+#listOfUsers {
+	width : 100%;
+}
+
+#addUsersButton {
+	float : right;
+}
+

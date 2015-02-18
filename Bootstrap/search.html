@@ -12,9 +12,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="moment-develop/moment.js"></script>
 <script type="text/javascript" src="bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-<script>
-	 moment('dd/MM/YYYY').format();
-</script>
 
 <body>
 	<div class="bodyBackround">
@@ -77,6 +74,16 @@
 					<input type = "email" id="inputEmail" class="form-control" placeholder = "Email" required>
 				</div>
 
+                <div class = "col-xs-12 col-md-12">
+                    <button id = "addUsersButton"  type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus"></span> Add User
+                    </button>
+                </div>
+
+                <div class = "col-xs-12">
+                    <textarea readonly id = "listOfUsers"></textarea>
+                </div>
+
             	<div class ="col-xs-12">
 				<br>
             		<button class="btn btn-lg btn-primary btn-block" type = "submit"> Search</button>
@@ -119,6 +126,13 @@ $('#oneway').change(function(){
         $("#datetimepicker7").on("dp.change",function (e) {
             $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
         });
+    });
+
+
+    $('#addUsersButton').click(function() {
+    $('#listOfUsers').val($('#listOfUsers').val()+ $('#inputName').val() + ', ' + $('#inputEmail').val() + '\n' );
+    $('#inputName').val('');
+    $('#inputEmail').val('');
     });
 </script>
 
