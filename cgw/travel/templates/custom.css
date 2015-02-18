@@ -2,6 +2,7 @@
 	.mainbit {
 		padding-top: 150px;
 	}
+
 	.bodyBackround {
 		background: #8EE5EE;
 		height: 100%;
@@ -19,7 +20,7 @@
 	.form-control{
 		background: #D1EEEE;
 	}
-	.footer1{
+	.rowfooter1{
 		text-indent: 13px;
 	}
 /* for polltable */
