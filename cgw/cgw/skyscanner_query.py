@@ -1,25 +1,38 @@
 import requests
 import datetime
 import json
+import http.client
+import os
 
 
 class SkyscannerQuery(object):
     """Object containing the data necessary to query the Skyscanner API"""
 
+    def __init__(self, market, currency, locale):
+
+        self.market, self.currency, self.locale = market, currency, locale
+
+        dir = os.path.dirname(__file__)
+        filename = os.path.join(dir, 'api_key.txt')
+        self.api_key = open(filename, 'r').read().strip('\n')
+
+
+class BrowseCacheQuery(SkyscannerQuery):
+    """A query of the Skyscanner browse cache"""
+
     def __init__(self, market, currency, locale,
                  origin_place, destination_place='anywhere',
                  outbound_partial_date='anytime', inbound_partial_date='anytime'):
 
-        self.market, self.currency, self.locale = market, currency, locale
+        super().__init__(market, currency, locale)
+
         self.origin_place, self.destination_place = origin_place, destination_place
         self.outbound_partial_date = outbound_partial_date
         self.inbound_partial_date = inbound_partial_date
 
-        self.api_key = open('api_key.txt', 'r').read().strip('\n')
+        self.results = self.makeQuery()
 
-        self.results = self.queryBrowseCache()
-
-    def queryBrowseCache(self):
+    def makeQuery(self):
         """Queries the Skyscanner browse cache and returns an array of quotes as dictionaries"""
 
         request_url = 'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/' +  \
@@ -32,10 +45,10 @@ class SkyscannerQuery(object):
         response = requests.get(request_url) # returns JSON string of quote data
         return response.json()
 
-    def getSortedQuotes(self):
+    def sortQuotesByPrice(self):
         """Returns array of quotes sorted by price"""
 
-        quotes = self.queryBrowseCache()['Quotes']
+        quotes = self.makeQuery()['Quotes']
         return sorted(quotes, key=lambda quote: quote['MinPrice'])
 
     def formatQuote(self, quote):
@@ -82,5 +95,42 @@ class SkyscannerQuery(object):
                 'Direct': quote['Direct']}
 
 
+class LivePriceQuery(SkyscannerQuery):
+
+    def __init__(market, currency, locale,
+                 origin_place, destination_place,
+                 outbound_date, passengers, *optional_args):
+        """Creates a Skyscanner live price query session, queries the session, and returns a dictionary of dictionaries"""
+
+        super().__init__(market, currency, locale)
+
+        self.origin_place = origin_place
+        self.destination_place = destination_place
+        self.outbound_date = outbound_date
+        self.passengers = passengers
+
+        self.results = self.makeQuery()
+
+    def makeQuery(self):
+
+        headers = {'content-type': 'application/x-www-form-urlencoded',
+                   'accept': 'application/json'}
+        payload = {'apiKey': self.api_key, 'country': self.market, 'currency': self.currency,
+                   'locale': self.locale, 'originplace': self.origin_place,
+                   'destinationplace': self.destination_place,
+                   'outbounddate': self.outbound_date, 'adults': self.passengers}
+        url = 'http://partners.api.skyscanner.net/apiservices/pricing/v1.0'
+
+        session = requests.post(url, data=payload, headers=headers)
+
+        if session.status_code != 201:
+            raise http.client.HTTPException(session.json())
+
+        polling_url = session.headers['Location'] + '?apiKey=' + api_key
+
+        results = requests.get(polling_url)
+
+
 # a query with the bare minimum of information
-# ssq = SkyscannerQuery('UK', 'GBP', 'en-GB', 'UK')
+# bcq = BrowseCacheQuery('UK', 'GBP', 'en-GB', 'UK')
+# print(ssq.formatQuote(ssq.results['Quotes'][0]))
