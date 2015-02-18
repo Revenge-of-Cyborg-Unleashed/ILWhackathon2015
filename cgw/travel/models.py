@@ -12,16 +12,17 @@ class Person(models.Model):
 	group_id = models.ForeignKey(Group)
 
 class Quote(models.Model):
-	out_carrier = models.CharField(max_length=30, default='')
-	in_carrier = models.CharField(max_length=30,default='')
-	dep_date = models.DateTimeField('departure date')
-	ret_date = models.DateTimeField('return date')
+	dep_date = models.DateTimeField('departure date') #Earliest outgoing flight
+	ret_date = models.DateTimeField('return date') #Earliest incoming flight
 	direct = models.BooleanField(default=False)
-	out_origin = models.CharField(max_length=30,default='')
-	in_origin = models.CharField(max_length=30,default='')
-	out_destination = models.CharField(max_length=30,default='')
-	in_destination = models.CharField(max_length=30,default='')
 	price = models.FloatField(default=0)
-	#passengers = models.IntegerField(default=0)
 	group_id = models.ForeignKey(Group)
 	score = models.IntegerField(default=0)
+
+class Flight(models.Model):
+	quote_id = models.ForeignKey(Quote)
+	carrier = models.CharField(max_length=30, default='')
+	origin = models.CharField(max_length=30, default='')
+	destination = models.CharField(max_length=30, default='')
+	date = models.DateTimeField('departure date')
+	outgoing = models.BooleanField(default=False) #incoming=T,outgoing=F
