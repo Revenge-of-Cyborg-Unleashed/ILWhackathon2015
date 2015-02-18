@@ -91,7 +91,7 @@
 								Maybe</div></div>
 						<div class="row-xs-1 row-md-1">
 							<div class="input-group">
-								<input type="radio" name="radioButton1" onclick="document.getElementById('first').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
 								No</div></div></div></td>
                 {% endfor%}
               </tr>
