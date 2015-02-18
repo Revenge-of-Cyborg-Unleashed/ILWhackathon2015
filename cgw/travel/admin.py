@@ -1,5 +1,5 @@
 from django.contrib import admin
-from travel.models import Group, Person, Quote
+from travel.models import Group, Person, Quote, Flight
 
 class GroupAdmin(admin.ModelAdmin):
 	fields = ['name','salt']
@@ -14,6 +14,10 @@ class QuoteAdmin(admin.ModelAdmin):
 		('Inbound Leg', {'fields': ['in_origin','in_destination','ret_date','in_carrier']}),
 	]
 
+class FlightAdmin(admin.ModelAdmin):
+	fields = ['quote_id','outgoing','date','origin','destination','carrier']
+
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Quote, QuoteAdmin)
+admin.site.register(Flight, FlightAdmin)
