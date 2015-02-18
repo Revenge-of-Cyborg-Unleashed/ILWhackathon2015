@@ -2,6 +2,10 @@
 	padding-top: 150px;
 }
 
-.body {
-	color: blue;
+#listOfUsers {
+	width : 100%;
+}
+
+#addUsersButton {
+	float : right;
 }
