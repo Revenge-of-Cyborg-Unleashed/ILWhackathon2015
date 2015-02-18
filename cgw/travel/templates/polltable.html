@@ -9,11 +9,10 @@
 	<script src="{% static "jquery.min.js" %}"></script>
 	<script src="{% static "js/boot.js" %}"></script>
 	<script src="{% static "js/bootstrap.min.js" %}"></script>
-	<style type="text/css">
+  <style type="text/css">
     body{
-    padding-top: 70px;
-		margin:0;
-		padding:0;
+    margin:0;
+    padding:0;
     }
     p{
         padding: 50px;
@@ -23,28 +22,25 @@
         background: #8EE5EE;
 
     }
-	h1{
-	    padding: 100pxpx;
+  h1{
+      padding: 100pxpx;
         font-size: 32px;
         font-weight: bold;
         text-align: center;
         background: #7AC5CD;
-	}
-
-	h2{
-		font-size: 12px;
-		text-align: centre;
-
-	}
-	.polltable{
-        background: #B2DFEE;
-		text-align: left;
-	}
-	h3{
-		text-align:left;
-		font-weight: bold;
-		font-size: 15px;
-	}
+  }
+  .pollTable{
+    background: #B2DFEE;
+    text-align: left;
+  }
+  h3{
+    text-align:left;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  h2{
+    font-size: 12px;
+  }
 
 
 </style>
@@ -80,18 +76,18 @@
                 <td>{{ person.email }}</td>
                 {% for flight in flights %}
                 <td>
-                  <div class = "first cell" id = "{{ person.email + flight }}">
+                  <div class = "first cell" id = "{{ person.email}} {{flight }}">
 						      <div class="row-xs-1 row-md-1" >
 							    <div class="input-group">
-								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email}} {{ flight }}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
 								Yes</div></div>
 						<div class="row-xs-1 row-md-1">
 							<div class="input-group">
-								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email}} {{flight }}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
 								Maybe</div></div>
 						<div class="row-xs-1 row-md-1">
 							<div class="input-group">
-								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email + flight }}').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+								<input type="radio" name="radioButton1" onclick="document.getElementById('{{ person.email}} {{flight }}').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
 								No</div></div></div></td>
                 {% endfor%}
               </tr>
