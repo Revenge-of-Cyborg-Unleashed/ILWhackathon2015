@@ -1,6 +1,6 @@
 /* for search form */
 	.bodyBackround {
-		background: #8EE5EE;
+		
 		height: 100%;
 		width: 100%;
 		left: 0;
@@ -51,10 +51,7 @@
         background: #B2DFEE;
 		text-align: left;
 	}
-	
-#listOfUsers {
-	width : 100%;
-}
+
 
 #addUsersButton {
 	float : right;
