@@ -21,7 +21,7 @@ class Quote(models.Model):
 	in_origin = models.CharField(max_length=30,default='')
 	out_destination = models.CharField(max_length=30,default='')
 	in_destination = models.CharField(max_length=30,default='')
-	price = models.IntegerField(default=0)
+	price = models.FloatField(default=0)
 	#passengers = models.IntegerField(default=0)
 	group_id = models.ForeignKey(Group)
 	score = models.IntegerField(default=0)
