@@ -20,7 +20,7 @@ def polltable(request):
 
 
 def pollview(request,group_salt):
-    people = [{'fname':"bob", "lnmae":"Bobby","email":"bob@bob.com"},{'fname':"John", "lnmae":"Bobby","email":"john@bob.com"}]
+    people = [{'name':"bob", "email":"bob@bob.com"},{'name':"John", "email":"john@bob.com"}]
     flights = ["1","2","3","4"]
     c = {'people':people,'flights':flights}
     return render(request, 'polltable.html', {'people':people,'flights':flights})
