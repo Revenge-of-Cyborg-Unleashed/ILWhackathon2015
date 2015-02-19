@@ -26,9 +26,15 @@ class BrowseCacheQuery(SkyscannerQuery):
 
         super().__init__(market, currency, locale)
 
-        self.origin_place, self.destination_place = origin_place, destination_place
         self.outbound_partial_date = outbound_partial_date
-        self.inbound_partial_date = inbound_partial_date
+
+        if outbound_partial_date != 'anytime' and inbound_partial_date == 'anytime':
+            self.inbound_partial_date = outbound_partial_date
+        else:
+            self.inbound_partial_date = inbound_partial_date
+
+        self.origin_place = origin_place
+        self.destination_place = destination_place
 
         self.results = self.makeQuery()
 
