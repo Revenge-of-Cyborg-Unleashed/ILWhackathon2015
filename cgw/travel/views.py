@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.template import RequestContext
 from travel.models import Group, Person, Quote, Flight
+from travel.fetch_query import saveQuery
 
 # Create your views here.
 
@@ -36,5 +37,20 @@ def pollview(request,group_salt):
 
 def submit(request):
     dict = request.POST
-    print(dict.keys())
+    origin_place = dict['inputDeparture']
+    print (dict['inputDeparture'])
+    destination_place = dict['inputArrival']
+    print (dict['inputArrival'])
+    outbound_partial_date = dict['depart']
+    print (dict['depart'])
+    inbound_partial_date = dict['returndate']
+    print (dict['returndate'])
+    group_name = dict['groupName']
+    print (dict['groupName'])
+    names_emails = dict['listOfUsers']
+    print (dict['listOfUsers'])
+	type(names_emails)
+    object = saveQuery(origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails)
+    salt = object.doQuery()
+    #return HttpRequest.path("group/"+salt+"/"), 
     return HttpResponse("hello")

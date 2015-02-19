@@ -80,6 +80,8 @@ class saveQuery(object):
 				for carrier in q['InboundLeg']['CarrierNames']:
 					flight = Flight(quote_id=quote, carrier=carrier, outgoing=False)
 					flight.save()
+		
+		return self.salt
 
 ## TEST FUNCTIONS::TO BE DELETED
 #q = saveQuery("LON", "ATH", "2015-06-06", "2015-06-08", "Test Group", [("Dave Lead","dave@dave.com"),("Bobby Bobs","bob@bobberty.com")])
