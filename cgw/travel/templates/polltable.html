@@ -35,18 +35,21 @@
 	  		<div class="pollTable">
 	    		<table width = "100%" border="1" id = "pollTable" rules = "rows" frame = "hsides">
 	            	<tr>
-	                	<td><h3> First Name </h3></td>
-	                	<td><h3> Last Name </h3></td>
-	                	<td><h3> Email </h3></td>
-						{% for flight in flights %}
-	        			<td><h3> {{ flight }}</h3></td>
-						{% endfor %}
+	                <!--	<td><h2> Name </h2></td>
+	                	<td><h2> Email </h2></td> -->
+	        			<td><h2> Price </h2></td>
+                        <td><h2> Depart From: </h2></td>
+                        <td><h2> To: </h2></td>
+                        <td><h2> Depart Date </h2></td>
+						<td><h2> Return From: </h2></td>
+						<td><h2> To: </h2></td>
+						<td><h2> Return Date</h2></td>
+                        <td><h2> Decision </h2></td>
 	            	</tr>
 
 		            {% for person in people %}
 		            <tr>
-		                <td>{{ person.fname }}</td>
-		                <td>{{ person.lname }}</td>
+		                <td>{{ person.name }}</td>
 		                <td>{{ person.email }}</td>
 		                {% for flight in flights %}
 		                <td>
