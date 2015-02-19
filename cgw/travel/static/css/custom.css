@@ -1,77 +1,10 @@
+/* search form prettiness */
+
+/*moves form down */
 .mainbit {
 	padding-top: 100px;
-}
-
-
-#addUsersButton {
-	float : right;
 }
 
 .rounded-edges {
 	border-radius: 20px;
 }
-
-
-
-/* for search form */
-	.bodyBackround {
-		background: #8EE5EE;
-		height: 100%;
-		width: 100%;
-		left: 0;
-		top: 0;
-		overflow: auto;
-		position: fixed;
-	}
-
-	h3 {
-		font-weight: bold;
-		font-size: 25px;
-	}
-	.form-control{
-		background: #D1EEEE;
-	}
-	.footer1{
-		text-indent: 13px;
-	}
-/* for polltable */
-	body{
-		margin:0;
-		padding:0;
-    }
-    p{
-        padding: 50px;
-        font-size: 25px;
-        font-weight: bold;
-        text-align: center;
-        background: #8EE5EE;
-
-    }
-	h1{
-	    padding: 100pxpx;
-        font-size: 32px;
-        font-weight: bold;
-        text-align: center;
-        background: #7AC5CD;
-	}
-	h2{
-		font-size: 12px;
-	}
-	h4{
-		text-align:left;
-		font-weight: bold;
-		font-size: 15px;
-	}
-	.pollTable{
-        background: #B2DFEE;
-		text-align: left;
-	}
-	
-#listOfUsers {
-	width : 100%;
-}
-
-#addUsersButton {
-	float : right;
-}
-
