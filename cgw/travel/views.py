@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from travel.forms import SearchForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context
 from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render_to_response
@@ -23,7 +23,7 @@ def polltable(request):
 
 
 def pollview(request,group_salt):
-    group = Group.objects.get(salt=group_salt)
+    group = Group.objects.filter(salt=group_salt)[0]
     people = Person.objects.filter(group_id=group)
     quotes = Quote.objects.filter(group_id=group)
     flights = []
@@ -76,5 +76,5 @@ def submit(request):
    # print (type(names_emails))
     object = saveQuery(origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails)
     salt = object.doQuery()
-    return HttpRequest.path("group/"+salt+"/"), 
+    return HttpResponseRedirect("/group/" + salt + "/") 
     #return HttpResponse("hello")
