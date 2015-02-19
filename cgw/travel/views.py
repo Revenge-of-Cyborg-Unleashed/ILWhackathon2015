@@ -7,7 +7,7 @@ from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.template import RequestContext
 from travel.models import Group, Person, Quote, Flight
-import travel.fetch_query
+from travel.fetch_query import saveQuery
 
 # Create your views here.
 
