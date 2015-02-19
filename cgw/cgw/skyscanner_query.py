@@ -109,6 +109,15 @@ class BrowseCacheQuery(SkyscannerQuery):
 
         return formatted_quote
 
+    def getCheapest(self, n=1):
+        cheapest_quotes = []
+        quotes = self.sortQuotesByPrice()
+        for x in range(n):
+            quote = quotes[x]
+            cheapest_quotes.append(self.formatQuote(quote))
+
+        return cheapest_quotes
+
 
 class LivePriceQuery(SkyscannerQuery):
 
