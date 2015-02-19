@@ -6,10 +6,11 @@ import uuid
 class saveQuery(object):
 	def __init__(self, origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails):
 		# Declare constants
+		print("STARTING SAVEQUERY")
 		self.MARKET = "GB"
 		self.CURRENCY = "GBP"
 		self.LOCALE = "en-GB"
-	
+		print("SETTING PARAMETERS")
 		# Declare variables
 		self.origin_place = origin_place
 		self.destination_place = destination_place
@@ -17,37 +18,42 @@ class saveQuery(object):
 		self.inbound_partial_date = inbound_partial_date
 	
 		self.name = group_name
+		print("GENERATING SALT")
 		self.salt = uuid.uuid4().hex
-	
+		print(self.salt)
+		print("SETTING NAMES_EMAILS")	
 		self.names_emails = names_emails
+		print(self.names_emails)
+
 
 	def doQuery(self):
+		print("DOING DOQUERY")
 		# Get Skyscanner Query
 		self.query = BrowseCacheQuery(market=self.MARKET, currency=self.CURRENCY, locale=self.LOCALE, origin_place=self.origin_place, destination_place=self.destination_place, outbound_partial_date=self.outbound_partial_date, inbound_partial_date=self.inbound_partial_date)
-	
+		print("SORTING QUOTES")
 		# Sort Query by Price
 		self.sortedquotes = self.query.sortQuotesByPrice()
-	
+		print("TRIMMING QUOTES")
 		# Trim off first 20 results
 		self.sortedqueries = self.sortedquotes[:20]
-	
+		print("FORMATTING QUOTES")
 		# Format (up to) 20 queries
 		self.final_queries = []
 		for q in self.sortedqueries:
 			#print(q)
 			self.final_queries.append(self.query.formatQuote(q))
-	
+		print("MAKING GROUP")
 		# Make and fill a new Group
 		group = Group(salt=self.salt, name=self.name)
 		#self.group_id = group.salt
 		group.save()
 		#print(self.group_id)
-	
+		print("MAKING PEEPS")
 		# Make and fill a new Person
 		for (name, email) in self.names_emails:
 			person = Person(name=name, email=email, decided=False, group_id=group)
 			person.save()
-	
+		print("MAKING QUOTES")
 		# Make and fill new Quotes
 		for q in self.final_queries: #CHECK FOR EXISTENCE
 			quote_id = q['QuoteId']
@@ -57,7 +63,7 @@ class saveQuery(object):
 				out_origin = q['OutboundLeg']['OriginName']
 				out_destination = q['OutboundLeg']['DestinationName']
 			else:
-				dep_date = '1970-01-01 00:00'
+				dep_date = None
 				out_origin = ''
 				out_destination=''
 			if 'InboundLeg' in q:
@@ -65,7 +71,7 @@ class saveQuery(object):
 				in_origin = q['InboundLeg']['OriginName']
 				in_destination = q['InboundLeg']['DestinationName']
 			else:
-				ret_date = '1970-01-01 00:00'
+				ret_date = None
 				in_origin= ''
 				in_destination= ''
 			direct = q['Direct']
@@ -81,6 +87,7 @@ class saveQuery(object):
 					flight = Flight(quote_id=quote, carrier=carrier, outgoing=False)
 					flight.save()
 		
+		print("RETURNING SALT")
 		return self.salt
 
 ## TEST FUNCTIONS::TO BE DELETED

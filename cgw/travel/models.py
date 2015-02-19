@@ -12,8 +12,8 @@ class Person(models.Model):
 	group_id = models.ForeignKey(Group)
 
 class Quote(models.Model):
-	dep_date = models.DateTimeField('departure date') 
-	ret_date = models.DateTimeField('return date') 
+	dep_date = models.DateTimeField('departure date', null=True) 
+	ret_date = models.DateTimeField('return date', null=True) 
 	direct = models.BooleanField(default=False)
 	price = models.FloatField(default=0)
 	group_id = models.ForeignKey(Group)
