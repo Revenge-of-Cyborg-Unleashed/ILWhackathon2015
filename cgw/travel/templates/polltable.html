@@ -35,8 +35,7 @@
             <div class="pollTable">
                 <table width = "100%" border="1" id = "pollTable" rules = "rows" frame = "hsides">
                     <tr>
-                    <!--    <td><h2> Name </h2></td>
-                        <td><h2> Email </h2></td> -->
+						<td><h2>  </h2></td>
                         <td><h2> Price </h2></td>
                         <td><h2> Depart From: </h2></td>
                         <td><h2> To: </h2></td>
@@ -54,7 +53,10 @@
 
                     {% for person in people %}
                     <tr>
-                        <td>{{ person.name }}</td>
+                        <td><select>
+							<option value="Name">{{ person.name }}</option>
+							</select>
+						</td>
                         <td>{{ person.email }}</td>
                         {% for flight in flights %}
                         <td>
