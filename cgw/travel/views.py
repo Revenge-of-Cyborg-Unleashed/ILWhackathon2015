@@ -57,6 +57,7 @@ def submit(request):
             name = temp[0]
             print (name)
             email = temp[1]
+            email.strip('\r')
             print (email)
             tuple_array.append((name,email))
             print (tuple)
