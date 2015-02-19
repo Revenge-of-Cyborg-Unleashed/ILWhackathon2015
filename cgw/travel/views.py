@@ -49,7 +49,6 @@ def submit(request):
     date = dict['returndate']
     converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
     inbound_partial_date = converted_date
-    print (dict['returndate'])
     group_name = dict['groupName']
     print (dict['groupName'])
     names_with_emails = dict['listOfUsers']
