@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.template import RequestContext
+from travel.models import Group, Person, Quote, Flight
 
 # Create your views here.
 
@@ -20,11 +21,18 @@ def polltable(request):
 
 
 def pollview(request,group_salt):
-    people = [{'name':"bob", "email":"bob@bob.com"},{'name':"John", "email":"john@bob.com"}]
-    flights = ["1","2","3","4"]
-    c = {'people':people,'flights':flights}
-    return render(request, 'polltable.html', {'people':people,'flights':flights})
+    group = Group.objects.get(salt=group_salt)
+    people = Person.objects.filter(group_id=group)
+    quotes = Quote.objects.filter(group_id=group)
+    flights = []
+    for q in quotes:
+        flights.append(Flight.objects.filter(quote_id=q))
 
+    print(group)
+    print(people)
+    print(quotes)
+    print(flights)
+    return render(request, 'polltable.html', {'people':people,'flights':quotes})
 
 def submit(request):
     dict = request.POST
