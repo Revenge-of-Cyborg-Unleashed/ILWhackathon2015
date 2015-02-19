@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^poll/$', polltable),
     url(r'^group/([^/]+)/$', pollview),
     url(r'^submitform/$', submit),
+    url(r'', search)
 )

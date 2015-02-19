@@ -6,14 +6,7 @@ from django.template import Context
 # Create your views here.
 
 def search(request):
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            return HttpResponseRedirect('/search/')
-    else:
-        form = SearchForm()
-    return render(request, 'searchform.html', {'form': form})
+    return render(request,'search.html')
 
 
 def polltable(request):
@@ -27,4 +20,4 @@ def pollview(request,group_salt):
     return render(request, 'polltable.html', {'people':people,'flights':flights})
 
 def submit(request):
-    
+    pass
