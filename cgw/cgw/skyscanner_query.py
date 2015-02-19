@@ -75,8 +75,9 @@ class BrowseCacheQuery(SkyscannerQuery):
             departure_date = datetime.datetime.strptime(quote['OutboundLeg']['DepartureDate'], '%Y-%m-%dT%H:%M:%S')
 
             formatted_quote['OutboundLeg'] = {'OriginName': outbound_origin_name,
-                            'CarrierNames': outbound_carrier_names,
-                            'DepartureDate': departure_date, 'DestinationName': outbound_destination_name}
+                                              'CarrierNames': outbound_carrier_names,
+                                              'DepartureDate': departure_date,
+                                              'DestinationName': outbound_destination_name}
 
         # for the inbound leg:
         # put names to origin and destination IDs
@@ -90,7 +91,7 @@ class BrowseCacheQuery(SkyscannerQuery):
             # put names to each carrier ID in the list
             inbound_carrier_names = []
             for carrier_id in quote['InboundLeg']['CarrierIds']:
-                name = next(place['Name'] for place in self.results['Carriers'] if place['CarrierId'] == carrier_id)
+                name = next(carrier['Name'] for carrier in self.results['Carriers'] if carrier['CarrierId'] == carrier_id)
                 inbound_carrier_names.append(name)
 
             # convert date string into a datetime object
@@ -105,10 +106,12 @@ class BrowseCacheQuery(SkyscannerQuery):
 
 class LivePriceQuery(SkyscannerQuery):
 
-    def __init__(market, currency, locale,
+    def __init__(self, market, currency, locale,
                  origin_place, destination_place,
-                 outbound_date, passengers, *optional_args):
+                 outbound_date, passengers):
         """Creates a Skyscanner live price query session, queries the session, and returns a dictionary of dictionaries"""
+
+    # def __init__(*args, **kwargs):
 
         super().__init__(market, currency, locale)
 
@@ -126,7 +129,8 @@ class LivePriceQuery(SkyscannerQuery):
         payload = {'apiKey': self.api_key, 'country': self.market, 'currency': self.currency,
                    'locale': self.locale, 'originplace': self.origin_place,
                    'destinationplace': self.destination_place,
-                   'outbounddate': self.outbound_date, 'adults': self.passengers}
+                   'outbounddate': self.outbound_date, 'adults': self.passengers,
+                   'locationschema': 'Iata'}
         url = 'http://partners.api.skyscanner.net/apiservices/pricing/v1.0'
 
         session = requests.post(url, data=payload, headers=headers)
@@ -134,13 +138,54 @@ class LivePriceQuery(SkyscannerQuery):
         if session.status_code != 201:
             raise HTTPException(session.json())
 
-        polling_url = session.headers['Location'] + '?apiKey=' + api_key
+        polling_url = session.headers['Location'] + '?apiKey=' + self.api_key
+        # add a way to save new location header
 
-        results = requests.get(polling_url)
+        return requests.get(polling_url).json()
 
+    def formatLivePrice(self, itinerary):
+        """Combines Itinerary and Leg dictionaries into one dictionary with cheapest flight information.
 
-# a query with the bare minimum of information
-bcq = BrowseCacheQuery('UK', 'GBP', 'en-GB', 'LON', 'ATH', '2015-06-06', '2015-06-08')
-# print(bcq.formatQuote(bcq.results['Quotes'][0]))
-print(bcq.results['Quotes'][0])
-print(bcq.formatQuote(bcq.results['Quotes'][0]))
+        IDs are replaced with names and date strings with datetime objects."""
+
+        cheapest_itinerary = itinerary['PricingOptions'][0]
+
+        leg = next(l for l in self.results['Legs'] if l['Id'] == itinerary['OutboundLegId'])
+
+        formatted_live_price = {'Price': cheapest_itinerary['Price'],
+                                'DeeplinkUrl': cheapest_itinerary['DeeplinkUrl'],
+                                'QuoteAgeInMinutes': cheapest_itinerary['QuoteAgeInMinutes'],
+                                'Directionality': leg['Directionality'],
+                                'Duration': leg['Duration'], 'JourneyMode': leg['JourneyMode']}
+
+        origin_station_id = leg['OriginStation']
+        origin_name = next(place['Name'] for place in self.results['Places'] if place['Id'] == origin_station_id)
+        destination_station_id = leg['DestinationStation']
+        destination_name = next(place['Name'] for place in self.results['Places'] if place['Id'] == destination_station_id)
+
+        departure_time = datetime.datetime.strptime(leg['Departure'], '%Y-%m-%dT%H:%M:%S')
+        arrival_time = datetime.datetime.strptime(leg['Arrival'], '%Y-%m-%dT%H:%M:%S')
+
+        # dict(dict_one.items() | dict_two.items()) combines two dictionaries
+        formatted_live_price = dict(formatted_live_price.items() |
+                                    {'ArrivalTime': arrival_time,
+                                     'DepartureTime': departure_time,
+                                     'OriginName': origin_name,
+                                     'DestinationName': destination_name}.items())
+
+        carrier_names = []
+        for carrier_id in leg['Carriers']:
+            name = next(carrier['Name'] for carrier in self.results['Carriers'] if carrier['Id'] == carrier_id)
+            carrier_names.append(name)
+
+        formatted_live_price['CarrierNames'] = carrier_names
+
+        return formatted_live_price
+
+    def getCheapest(self, n=1):
+        cheapest_live_prices = []
+        for x in range(n):
+            live_price = self.results['Itineraries'][x]
+            cheapest_live_prices.append(self.formatLivePrice(live_price))
+
+        return cheapest_live_prices

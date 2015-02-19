@@ -7,6 +7,10 @@
 	float : right;
 }
 
+.rounded-edges {
+	border-radius: 20px;
+}
+
 
 
 /* for search form */
