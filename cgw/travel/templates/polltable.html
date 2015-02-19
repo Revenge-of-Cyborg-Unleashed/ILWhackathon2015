@@ -24,17 +24,22 @@
     </div>
 
     <div class = "col-xs-12 col-md-8">
-        <div class="container-fluid">
-            <h1 class = "rounded-edges">Schedule and book your group trip</h1>
-            <p class = "rounded-edges">To schedule your group trip choose the flights that suit you personally the best. We try to make sure... Once everyone has voted, you will get a link to begin the booking process for the flight that suited everyone, if, however, there will not be a flight that suited everyone, you will get another link with different options.</p>
-        </div>
+    	<h1> Who are you?</h1>
+    	<div class="container">
+	    	<div class="dropdown">
+	        	<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Names
+		        	<span class="caret"></span></button>
+		    		    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 
-        <div class="container-fluid">
-            <h1 class = "rounded-edges">Please vote below!</h1>
-            <p class = "rounded-edges">Choose your preferences by ticking the box. Note: if you choose maybe ...Please choose as many options as you like and be happy!</p>
-        </div>
+		    		    {% for person in people %}
+		          		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+		          				{{person.name}} </a></li>
+		          		{% endfor %}
+		          		</ul>
 
-
+	      </div>
+    	</div>
+        
         {% for flight in flights %}
         <div class = "col-xs-12">
 		<div class="panel-group pollTable rounded-edges" id="accordion" role="tablist" aria-multiselectable="true">
@@ -42,7 +47,7 @@
 		    	<div class="panel-heading" role="tab" id="heading-{{flight.id}}">
 		      		<h4 class="panel-title">
 		        		<a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{flight.id}}" aria-expanded="true" aria-controls="collapse-{{flight.id}}">
-		          			£{{flight.price}}
+		          			<strong>£{{flight.price}}</strong>
 		        		</a>
 		      		</h4>
 		    	</div>
@@ -52,24 +57,24 @@
 		        <div class = "col-xs-12">
 		        	<table class = "table" width = "100%" border="1" id = "pollTable" rules = "rows" frame = "hsides">                 
 		                    <tr>
-		                    	<td>Depart From: {{flight.out_origin}}</td>
+		                    	<td><strong>Depart From: {{flight.out_origin}}</td>
 		                    <tr>
 		                    <tr>
-		                    	<td>To: {{flight.out_destination}}</td>
+		                    	<td><strong>To: {{flight.out_destination}}</td>
 		                    </tr>
 							<tr>
 														</tr>
 							<tr>
-								<td>Return From: {{flight.in_origin}}</td>
+								<td><strong>Return From: </strong> {{flight.in_origin}}</td>
 							</tr>
 							<tr>
-								<td>To: {{flight.out_destination}}</td>
+								<td><strong>To:</strong> {{flight.out_destination}}</td>
 							</tr>
 							<tr>
-								<td>Return Date: {{flight.ret_date.date}}</td>
+								<td><strong>Return Date:</strong> {{flight.ret_date.date}}</td>
 							</tr>
 							<tr>
-								<td>Departure Date:  
+								<td><strong>Departure Date:</strong>  
                                         {% if flight.dep_date == None %}
                                             Unavailable
                                  	    {%else%}
@@ -78,7 +83,8 @@
                                 </td>
                             </tr>
 		                    <tr>
-								<td>Direct?: {% if flight.direct%}
+								<td><strong>Direct?:</strong>
+									{% if flight.direct%}
 										Yes
 									{% else %}
 										No
@@ -86,17 +92,18 @@
 								</td>
 							</tr>
 							<tr>
-								<td><div class="row-xs-1 row-md-1" >
+								<td>
+									<div class="row-xs-1 row-md-1" >
+			                            <div class="input-group">
+			                            	<input type="radio" name="radio-{{flight.id}}" onclick="document.getElementById('heading-{{flight.id}}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
+			                                Yes</div></div>
+			          	            <div class="row-xs-1 row-md-1">
+			                            <div class="input-group">
+			                               	<input type="radio" name="radio-{{flight.id}}" onclick="document.getElementById('heading-{{flight.id}}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
+			                                Maybe</div></div>
+			                        <div class="row-xs-1 row-md-1">
 		                                <div class="input-group">
-		                                	<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
-		                                    Yes</div></div>
-		                            <div class="row-xs-1 row-md-1">
-		                                <div class="input-group">
-		                                	<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
-		                                    Maybe</div></div>
-		                            <div class="row-xs-1 row-md-1">
-		                                <div class="input-group">
-		                                    <input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+		                                    <input type="radio" name="radio-{{flight.id}}" onclick="document.getElementById('heading-{{flight.id}}').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
 		                                    No</div></div>
 		                        </td>
 		                    </tr>
@@ -111,8 +118,10 @@
 			</div>         
 		{%endfor%}
 
-            <div class="submitButton">
-                <button type="button" class="btn btn-primary btn-block btn-sm">Submit</button>
+            <div class = "col-xs-12">
+            	<div class="submitButton">
+                	<button type="button" class="btn btn-primary btn-block btn-sm">Submit</button>
+            	</div>
             </div>
     
         </div>
