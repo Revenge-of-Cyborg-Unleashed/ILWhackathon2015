@@ -8,6 +8,7 @@ from django.core.context_processors import csrf
 from django.template import RequestContext
 from travel.models import Group, Person, Quote, Flight
 from travel.fetch_query import saveQuery
+from datetime import datetime
 
 # Create your views here.
 
@@ -41,10 +42,13 @@ def submit(request):
     print (dict['inputDeparture'])
     destination_place = dict['inputArrival']
     print (dict['inputArrival'])
-    outbound_partial_date = dict['depart']
-    print (dict['depart'])
-    inbound_partial_date = dict['returndate']
-    print (dict['returndate'])
+    date = dict['depart']
+    converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    outbound_partial_date = converted_date
+    print (converted_date)
+    date = dict['returndate']
+    converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    inbound_partial_date = converted_date
     group_name = dict['groupName']
     print (dict['groupName'])
     names_with_emails = dict['listOfUsers']
@@ -57,8 +61,7 @@ def submit(request):
             name = temp[0]
             print (name)
             email = temp[1]
-            email.strip('\r')
-            print (email)
+            email = email.replace('\r','')
             tuple_array.append((name,email))
             print (tuple)
     names_emails = tuple_array
@@ -68,5 +71,5 @@ def submit(request):
    # print (type(names_emails))
     object = saveQuery(origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails)
     salt = object.doQuery()
-    #return HttpRequest.path("group/"+salt+"/"), 
-    return HttpResponse("hello")
+    return HttpRequest.path("group/"+salt+"/"), 
+    #return HttpResponse("hello")
