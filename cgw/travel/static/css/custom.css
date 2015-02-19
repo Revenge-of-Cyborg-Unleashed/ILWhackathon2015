@@ -11,6 +11,13 @@
 	border-radius: 20px;
 }
 
+#listOfUsers {
+	width : 100%;
+}
+
+#addUsersButton {
+	float : right;
+}
 
 
 /* for search form */
@@ -34,6 +41,8 @@
 	.footer1{
 		text-indent: 13px;
 	}
+
+
 /* for polltable */
 	body{
 		margin:0;
@@ -66,12 +75,4 @@
         background: #B2DFEE;
 		text-align: left;
 	}
-	
-#listOfUsers {
-	width : 100%;
-}
-
-#addUsersButton {
-	float : right;
-}
 
