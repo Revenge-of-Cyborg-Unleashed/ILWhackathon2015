@@ -54,6 +54,7 @@ def submit(request):
         temp = name_email.split(", ")
         print temp
         name = temp[0]
+        print name
         email = temp[1]
         tuple_array.append((name,email))
     names_emails = tuple_array
