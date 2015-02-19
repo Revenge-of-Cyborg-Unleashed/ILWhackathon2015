@@ -45,7 +45,7 @@ def submit(request):
     date = dict['depart']
     converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
     outbound_partial_date = converted_date
-    print converted_date
+    print (converted_date)
     date = dict['returndate']
     converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
     inbound_partial_date = converted_date
