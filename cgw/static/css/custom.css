@@ -1,13 +1,24 @@
+.mainbit {
+	padding-top: 100px;
+}
+
+
+#addUsersButton {
+	float : right;
+}
+
+
+
 /* for search form */
 	.bodyBackround {
-		
+		background: #8EE5EE;
 		height: 100%;
 		width: 100%;
 		left: 0;
 		top: 0;
 		overflow: auto;
 		position: fixed;
-	}	
+	}
 
 	h3 {
 		font-weight: bold;
@@ -51,7 +62,10 @@
         background: #B2DFEE;
 		text-align: left;
 	}
-
+	
+#listOfUsers {
+	width : 100%;
+}
 
 #addUsersButton {
 	float : right;
