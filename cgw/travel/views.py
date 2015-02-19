@@ -43,11 +43,13 @@ def submit(request):
     destination_place = dict['inputArrival']
     print (dict['inputArrival'])
     date = dict['depart']
-    converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    #converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    converted_date = date.replace("/", "-")
     outbound_partial_date = converted_date
     print (converted_date)
     date = dict['returndate']
-    converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    #converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    converted_date = date.replace("/", "-")
     inbound_partial_date = converted_date
     group_name = dict['groupName']
     print (dict['groupName'])
