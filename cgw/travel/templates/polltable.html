@@ -18,67 +18,76 @@
 <p>
   {{ static }}
 </p>
-	<div class="container-fluid">
-		<h1>Schedule and book your group trip</h1>
-		<p>To schedule your group trip choose the flights that suit you personally the best. We try to make sure... Once everyone has voted, you will get a link to begin the booking process for the flight that suited everyone, if, however, there will not be a flight that suited everyone, you will get another link with different options.</p>
+
+	<div class = "col-xs-0 col-md-2">
 	</div>
 
-	<div class="container-fluid">
-		<h1>Please vote below!</h1>
-  		<p>Choose your preferences by ticking the box. Note: if you choose maybe ...Please choose as many options as you like and be happy!</p>
-
-  		<div class="pollTable">
-    		<table width = "100%" border="1" id = "pollTable" rules = "rows" frame = "hsides">
-            	<tr>
-                	<td><h3> First Name </h3></td>
-                	<td><h3> Last Name </h3></td>
-                	<td><h3> Email </h3></td>
-					{% for flight in flights %}
-        			<td><h3> {{ flight }}</h3></td>
-					{% endfor %}
-            	</tr>
-
-	            {% for person in people %}
-	            <tr>
-	                <td>{{ person.fname }}</td>
-	                <td>{{ person.lname }}</td>
-	                <td>{{ person.email }}</td>
-	                {% for flight in flights %}
-	                <td>
-
-	                <div class = "first cell" id = "{{ person.email }}{{ flight }}">
-							<div class="row-xs-1 row-md-1" >
-								<div class="input-group">
-									<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
-									Yes</div></div>
-							<div class="row-xs-1 row-md-1">
-								<div class="input-group">
-									<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
-									Maybe</div></div>
-							<div class="row-xs-1 row-md-1">
-								<div class="input-group">
-									<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
-									No</div></div></div></td>
-	                {% endfor%}
-	            </tr>
-	            	{% endfor %}
-
-	        </tbody>
-	    	</table>
+	<div class = "col-xs-12 col-md-8">
+		<div class="container-fluid">
+			<h1>Schedule and book your group trip</h1>
+			<p>To schedule your group trip choose the flights that suit you personally the best. We try to make sure... Once everyone has voted, you will get a link to begin the booking process for the flight that suited everyone, if, however, there will not be a flight that suited everyone, you will get another link with different options.</p>
 		</div>
-		<br>
 
-		<div class="submitButton">
-	        <button type="button" class="btn btn-primary btn-block btn-sm">Submit</button>
-	    </div>
+		<div class="container-fluid">
+			<h1>Please vote below!</h1>
+	  		<p>Choose your preferences by ticking the box. Note: if you choose maybe ...Please choose as many options as you like and be happy!</p>
 
-	  	<div class="row">
-			<div class="col-xs-12">
-				<footer>
-					<h2>&copy; Copyright 2015</h2>
-				</footer>
+	  		<div class="pollTable">
+	    		<table width = "100%" border="1" id = "pollTable" rules = "rows" frame = "hsides">
+	            	<tr>
+	                	<td><h3> First Name </h3></td>
+	                	<td><h3> Last Name </h3></td>
+	                	<td><h3> Email </h3></td>
+						{% for flight in flights %}
+	        			<td><h3> {{ flight }}</h3></td>
+						{% endfor %}
+	            	</tr>
+
+		            {% for person in people %}
+		            <tr>
+		                <td>{{ person.fname }}</td>
+		                <td>{{ person.lname }}</td>
+		                <td>{{ person.email }}</td>
+		                {% for flight in flights %}
+		                <td>
+
+		                <div class = "first cell" id = "{{ person.email }}{{ flight }}">
+								<div class="row-xs-1 row-md-1" >
+									<div class="input-group">
+										<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#CAFF70':'#B2DFEE';">
+										Yes</div></div>
+								<div class="row-xs-1 row-md-1">
+									<div class="input-group">
+										<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#FFF0F5':'#B2DFEE';">
+										Maybe</div></div>
+								<div class="row-xs-1 row-md-1">
+									<div class="input-group">
+										<input type="radio" name="radio{{ person.email }}{{ flight }}" onclick="document.getElementById('{{ person.email }}{{ flight }}').style.backgroundColor=this.checked?'#FF6347':'#B2DFEE';">
+										No</div></div></div></td>
+		                {% endfor%}
+		            </tr>
+		            	{% endfor %}
+
+		        </tbody>
+		    	</table>
+			</div>
+			<br>
+
+			<div class="submitButton">
+		        <button type="button" class="btn btn-primary btn-block btn-sm">Submit</button>
+		    </div>
+
+		  	<div class="row">
+				<div class="col-xs-12">
+					<footer>
+						<h2>&copy; Copyright 2015</h2>
+					</footer>
+				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class = "col-xs-0 col-md-2">
 	</div>
 </body>
 </html>
