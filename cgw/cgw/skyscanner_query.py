@@ -189,3 +189,32 @@ class LivePriceQuery(SkyscannerQuery):
             cheapest_live_prices.append(self.formatLivePrice(live_price))
 
         return cheapest_live_prices
+
+
+class AutoSuggestQuery(SkyscannerQuery):
+
+    def __init__(self, market, currency, locale, query_string):
+
+        super().__init__(market, currency, locale)
+        self.query_string = query_string
+
+        self.results = self.makeQuery()
+
+    def makeQuery(self):
+
+        url = 'http://partners.api.skyscanner.net/apiservices/autosuggest/' + \
+              'v1.0/{0}/{1}/{2}/?query={3}&apiKey={4}' \
+              .format(self.market, self.currency, self.locale,
+                      self.query_string, self.api_key)
+
+        response = requests.get(url)
+        return response.json()
+
+    def getClosest(self, n=1):
+        closest_suggestions = []
+        number_of_suggestions = min(len(self.results['Places']), n)
+        for x in range(number_of_suggestions):
+            suggestion = self.results['Places'][x]
+            closest_suggestions.append(suggestion)
+
+        return closest_suggestions
