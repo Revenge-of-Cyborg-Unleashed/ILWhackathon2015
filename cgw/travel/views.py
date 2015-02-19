@@ -36,5 +36,13 @@ def pollview(request,group_salt):
 
 def submit(request):
     dict = request.POST
-    print(dict.keys())
-    return HttpResponse("hello")
+	c = dict.keys()
+	origin_place = dict['inputDeparture']
+	destination_place = dict['inputArrival']
+	outbound_partial_date = dict['depart']
+	inbound_partial_date = dict['returndate']
+	group_name = dict['groupName']
+	names_emails = dict['listOfUsers']
+	object = saveQuery(origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails)
+	salt = object.doQuery()
+    return HttpRequest.path("group/"+salt+"/")
