@@ -114,8 +114,8 @@ $('#oneway').change(function(){
     }
 });
     $(function () {
-        $('#datetimepicker6').datetimepicker({format: 'DD/MM/YYYY'});
-        $('#datetimepicker7').datetimepicker({format: 'DD/MM/YYYY'});
+        $('#datetimepicker6').datetimepicker({format: 'YYYY-MM-DD'});
+        $('#datetimepicker7').datetimepicker({format: 'YYYY-MM-DD'});
         $("#datetimepicker6").on("dp.change",function (e) {
             $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
         });
