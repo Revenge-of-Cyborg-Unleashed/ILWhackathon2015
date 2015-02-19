@@ -56,7 +56,7 @@ class saveQuery(object):
 				out_origin = q['OutboundLeg']['OriginName']
 				out_destination = q['OutboundLeg']['DestinationName']
 			else:
-				dep_date = '1970-01-01 00:00+0000'
+				dep_date = '1970-01-01 00:00'
 				out_origin = ''
 				out_destination=''
 			if 'InboundLeg' in q:
@@ -64,7 +64,7 @@ class saveQuery(object):
 				in_origin = q['InboundLeg']['OriginName']
 				in_destination = q['InboundLeg']['DestinationName']
 			else:
-				ret_date = '1970-01-01 00:00+0000'
+				ret_date = '1970-01-01 00:00'
 				in_origin= ''
 				in_destination= ''
 			direct = q['Direct']
