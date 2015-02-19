@@ -26,9 +26,15 @@ class BrowseCacheQuery(SkyscannerQuery):
 
         super().__init__(market, currency, locale)
 
-        self.origin_place, self.destination_place = origin_place, destination_place
         self.outbound_partial_date = outbound_partial_date
-        self.inbound_partial_date = inbound_partial_date
+
+        if outbound_partial_date != 'anytime' and inbound_partial_date == 'anytime':
+            self.inbound_partial_date = outbound_partial_date
+        else:
+            self.inbound_partial_date = inbound_partial_date
+
+        self.origin_place = origin_place
+        self.destination_place = destination_place
 
         self.results = self.makeQuery()
 
@@ -102,6 +108,15 @@ class BrowseCacheQuery(SkyscannerQuery):
                                              'DepartureDate': return_date, 'DestinationName': inbound_destination_name}
 
         return formatted_quote
+
+    def getCheapest(self, n=1):
+        cheapest_quotes = []
+        quotes = self.sortQuotesByPrice()
+        for x in range(n):
+            quote = quotes[x]
+            cheapest_quotes.append(self.formatQuote(quote))
+
+        return cheapest_quotes
 
 
 class LivePriceQuery(SkyscannerQuery):
@@ -189,3 +204,32 @@ class LivePriceQuery(SkyscannerQuery):
             cheapest_live_prices.append(self.formatLivePrice(live_price))
 
         return cheapest_live_prices
+
+
+class AutoSuggestQuery(SkyscannerQuery):
+
+    def __init__(self, market, currency, locale, query_string):
+
+        super().__init__(market, currency, locale)
+        self.query_string = query_string
+
+        self.results = self.makeQuery()
+
+    def makeQuery(self):
+
+        url = 'http://partners.api.skyscanner.net/apiservices/autosuggest/' + \
+              'v1.0/{0}/{1}/{2}/?query={3}&apiKey={4}' \
+              .format(self.market, self.currency, self.locale,
+                      self.query_string, self.api_key)
+
+        response = requests.get(url)
+        return response.json()
+
+    def getClosest(self, n=1):
+        closest_suggestions = []
+        number_of_suggestions = min(len(self.results['Places']), n)
+        for x in range(number_of_suggestions):
+            suggestion = self.results['Places'][x]
+            closest_suggestions.append(suggestion)
+
+        return closest_suggestions
