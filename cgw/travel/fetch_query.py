@@ -1,6 +1,7 @@
 from cgw.skyscanner_query import BrowseCacheQuery
 from travel.models import *
 import importlib.machinery
+import uuid
 
 class saveQuery(object):
 	def __init__(self, origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails):
@@ -16,7 +17,7 @@ class saveQuery(object):
 		self.inbound_partial_date = inbound_partial_date
 	
 		self.name = group_name
-		self.salt = "123123131231" ## TEST VALUE: CHANGE LATER TO HASH ALGORITHM
+		self.salt = uuid.uuid4().hex
 	
 		self.names_emails = names_emails
 
