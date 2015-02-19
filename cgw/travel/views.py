@@ -47,7 +47,15 @@ def submit(request):
     print (dict['returndate'])
     group_name = dict['groupName']
     print (dict['groupName'])
-    names_emails = dict['listOfUsers']
+    names_with_emails = dict['listOfUsers']
+    split_names = names_with_emails.split('\n')
+    tuple_array = []
+    for name_email in split_names:
+        temp = name_email.split(", ")
+        name = temp[0]
+        email = temp[1]
+        tuple_array.append((name,email))
+    names_emails = tuple_array
     print ('P')
     print (dict['listOfUsers'])
     print ('P')
