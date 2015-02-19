@@ -51,7 +51,7 @@ def submit(request):
     print ('P')
     print (dict['listOfUsers'])
     print ('P')
-    type(names_emails)
+    print (type(names_emails))
     object = saveQuery(origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails)
     salt = object.doQuery()
     #return HttpRequest.path("group/"+salt+"/"), 
