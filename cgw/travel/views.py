@@ -32,8 +32,7 @@ def pollview(request,group_salt):
     print(people)
     print(quotes)
     print(flights)
-    return render(request, 'polltable.html', {'name':people,'flights':quotes})
-
+    return render(request, 'polltable.html', {'people':people,'flights':quotes})
 
 def submit(request):
     dict = request.POST
