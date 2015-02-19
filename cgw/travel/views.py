@@ -8,6 +8,7 @@ from django.core.context_processors import csrf
 from django.template import RequestContext
 from travel.models import Group, Person, Quote, Flight
 from travel.fetch_query import saveQuery
+from datetime import datetime
 
 # Create your views here.
 
@@ -41,9 +42,12 @@ def submit(request):
     print (dict['inputDeparture'])
     destination_place = dict['inputArrival']
     print (dict['inputArrival'])
-    outbound_partial_date = dict['depart']
-    print (dict['depart'])
-    inbound_partial_date = dict['returndate']
+    date = dict['depart']
+    converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    outbound_partial_date = converted_date
+    date = dict['returndate']
+    converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    inbound_partial_date = converted_date
     print (dict['returndate'])
     group_name = dict['groupName']
     print (dict['groupName'])
