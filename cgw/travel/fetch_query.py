@@ -29,7 +29,10 @@ class saveQuery(object):
 	def doQuery(self):
 		print("DOING DOQUERY")
 		# Get Skyscanner Query
-		self.query = BrowseCacheQuery(market=self.MARKET, currency=self.CURRENCY, locale=self.LOCALE, origin_place=self.origin_place, destination_place=self.destination_place, outbound_partial_date=self.outbound_partial_date, inbound_partial_date=self.inbound_partial_date)
+		if self.inbound_partial_date == None:
+			self.query = BrowseCacheQuery(market=self.MARKET, currency=self.CURRENCY, locale=self.LOCALE, origin_place=self.origin_place, destination_place=self.destination_place, outbound_partial_date=self.outbound_partial_date)
+		else:		
+			self.query = BrowseCacheQuery(market=self.MARKET, currency=self.CURRENCY, locale=self.LOCALE, origin_place=self.origin_place, destination_place=self.destination_place, outbound_partial_date=self.outbound_partial_date, inbound_partial_date=self.inbound_partial_date)
 		print("SORTING QUOTES")
 		# Sort Query by Price
 		self.sortedquotes = self.query.sortQuotesByPrice()
