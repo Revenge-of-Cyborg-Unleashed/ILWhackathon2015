@@ -25,3 +25,6 @@ def pollview(request,group_salt):
     flights = ["1","2","3","4"]
     c = {'people':people,'flights':flights}
     return render(request, 'polltable.html', {'people':people,'flights':flights})
+
+def submit(request):
+    
