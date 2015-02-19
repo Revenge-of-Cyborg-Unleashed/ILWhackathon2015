@@ -51,15 +51,21 @@ def submit(request):
     split_names = names_with_emails.split('\n')
     tuple_array = []
     for name_email in split_names:
-        temp = name_email.split(", ")
-        name = temp[0]
-        email = temp[1]
-        tuple_array.append((name,email))
+        if name_email is not '':
+            temp = name_email.split(", ")
+            print (temp)
+            name = temp[0]
+            print (name)
+            email = temp[1]
+            email.strip('\r')
+            print (email)
+            tuple_array.append((name,email))
+            print (tuple)
     names_emails = tuple_array
-    print ('P')
-    print (dict['listOfUsers'])
-    print ('P')
-    print (type(names_emails))
+   # print ('P')
+   # print (dict['listOfUsers'])
+   # print ('P')
+   # print (type(names_emails))
     object = saveQuery(origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails)
     salt = object.doQuery()
     #return HttpRequest.path("group/"+salt+"/"), 
