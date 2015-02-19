@@ -2,11 +2,17 @@ from django.shortcuts import render
 from travel.forms import SearchForm
 from django.http import HttpResponse
 from django.template import Context
+from django.views.decorators.csrf import csrf_protect
+from django.shortcuts import render_to_response
+from django.core.context_processors import csrf
+from django.template import RequestContext
 
 # Create your views here.
 
+@csrf_protect
 def search(request):
-    return render(request,'search.html')
+    csrfContext = RequestContext(request)
+    return render_to_response('search.html',csrfContext)
 
 
 def polltable(request):
@@ -19,5 +25,8 @@ def pollview(request,group_salt):
     c = {'people':people,'flights':flights}
     return render(request, 'polltable.html', {'people':people,'flights':flights})
 
+
 def submit(request):
-    pass
+    dict = request.POST
+    print(dict.keys())
+    return HttpResponse("hello")
