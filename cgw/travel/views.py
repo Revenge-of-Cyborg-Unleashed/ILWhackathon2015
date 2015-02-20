@@ -50,10 +50,10 @@ def submit(request):
     print (converted_date)
     if 'returndate' in dict:
         date = dict['returndate']
+        converted_date = date.replace("/", "-")
     else:
-        date = None
+        converted_date = None
     #converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
-    converted_date = date.replace("/", "-")
     inbound_partial_date = converted_date
     group_name = dict['groupName']
     print (dict['groupName'])
