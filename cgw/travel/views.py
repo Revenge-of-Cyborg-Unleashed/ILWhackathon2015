@@ -80,7 +80,7 @@ def submit(request):
 def autoSuggest(request):
 	#GET autoSuggest
 	dict = request.GET
-	query = dict['input']
+	query = dict['suggestion']
 	results = AutoSuggestQuery(query_string=query).getClosest(5)
 	#RETURN RESULTS
 	return HttpResponse(results)
