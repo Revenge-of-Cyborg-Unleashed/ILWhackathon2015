@@ -49,9 +49,9 @@ def submit(request):
     outbound_partial_date = converted_date
     print (converted_date)
     if 'returndate' in dict:
-    	date = dict['returndate']
+        date = dict['returndate']
     else:
-    	date = None
+        date = None
     #converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
     converted_date = date.replace("/", "-")
     inbound_partial_date = converted_date
@@ -81,9 +81,9 @@ def submit(request):
     #return HttpResponse("hello")
 
 def autoSuggest(request):
-	#GET autoSuggest
-	dict = request.GET
-	query = dict['suggestion']
-	results = AutoSuggestQuery(query_string=query).getClosest(5)
-	#RETURN RESULTS
-	return HttpResponse(results)
+    #GET autoSuggest
+    dict = request.GET
+    query = dict['suggestion']
+    results = AutoSuggestQuery(query_string=query).getClosest(5)
+    #RETURN RESULTS
+    return HttpResponse(results)
