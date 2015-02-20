@@ -13,6 +13,7 @@ from cgw.skyscanner_query import AutoSuggestQuery
 
 # Create your views here.
 
+
 @csrf_protect
 def search(request):
     csrfContext = RequestContext(request)
@@ -37,51 +38,53 @@ def pollview(request,group_salt):
     print(flights)
     return render(request, 'polltable.html', {'people':people,'flights':quotes})
 
+
 def submit(request):
     dict = request.POST
     origin_place = dict['inputDeparture']
-    print (dict['inputDeparture'])
+    print("inputDeparture: " + dict['inputDeparture'])
     destination_place = dict['inputArrival']
-    print (dict['inputArrival'])
+    print("inputArrival: " + dict['inputArrival'])
     date = dict['depart']
-    #converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    # converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
     converted_date = date.replace("/", "-")
     outbound_partial_date = converted_date
-    print (converted_date)
+    print(converted_date)
     if 'returndate' in dict:
         date = dict['returndate']
         converted_date = date.replace("/", "-")
     else:
         converted_date = None
-    #converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
+    # converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
     inbound_partial_date = converted_date
     group_name = dict['groupName']
-    print (dict['groupName'])
+    print(dict['groupName'])
     names_with_emails = dict['listOfUsers']
     split_names = names_with_emails.split('\n')
     tuple_array = []
     for name_email in split_names:
         if name_email is not '':
             temp = name_email.split(", ")
-            print (temp)
+            print(temp)
             name = temp[0]
-            print (name)
+            print(name)
             email = temp[1]
-            email = email.replace('\r','')
-            tuple_array.append((name,email))
-            print (tuple)
+            email = email.replace('\r', '')
+            tuple_array.append((name, email))
+            print(tuple)
     names_emails = tuple_array
-   # print ('P')
-   # print (dict['listOfUsers'])
-   # print ('P')
-   # print (type(names_emails))
+    # print('P')
+    # print(dict['listOfUsers'])
+    # print('P')
+    # print(type(names_emails))
     object = saveQuery(origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails)
     salt = object.doQuery()
     return HttpResponseRedirect("/group/" + salt + "/")
-    #return HttpResponse("hello")
+    # return HttpResponse("hello")
+
 
 def autoSuggest(request):
-    #GET autoSuggest
+    # GET autoSuggest
     dict = request.GET
     query = dict['suggestion']
     results = AutoSuggestQuery(query_string=query).getClosest(5)
