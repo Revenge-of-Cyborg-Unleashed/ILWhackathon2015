@@ -8,3 +8,10 @@
 .rounded-edges {
 	border-radius: 20px;
 }
+
+.ui-autocomplete
+{
+	position:absolute;
+	cursor:default;
+	z-index:4000 !important
+}

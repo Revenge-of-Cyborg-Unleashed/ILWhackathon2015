@@ -74,13 +74,14 @@ def submit(request):
    # print (type(names_emails))
     object = saveQuery(origin_place, destination_place, outbound_partial_date, inbound_partial_date, group_name, names_emails)
     salt = object.doQuery()
-    return HttpResponseRedirect("/group/" + salt + "/") 
+    return HttpResponseRedirect("/group/" + salt + "/")
     #return HttpResponse("hello")
 
 def autoSuggest(request):
-	#GET autoSuggest
-	dict = request.GET
-	query = dict['input']
-	results = AutoSuggestQuery(query_string=query).getClosest(5)
-	#RETURN RESULTS
-	return HttpResponse(results)
+    #GET autoSuggest
+    dict = request.GET
+    query = dict['suggestion']
+    results = AutoSuggestQuery(query_string=query).getClosest(5)
+    stringified_results = str(results).replace('\'', '\"')
+
+    return HttpResponse(stringified_results)

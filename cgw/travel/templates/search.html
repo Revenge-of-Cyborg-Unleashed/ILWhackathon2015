@@ -6,12 +6,15 @@
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css" %}>
-    <link rel="stylesheet" type="text/css" href={% static "custom.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "css/custom.css"%}>
     <link rel="stylesheet" href={% static "bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"%} />
 
 </head>
-<script src="http://code.jquery.com/jquery.min.js"></script>
+<!-- <script src={% static "/js/jquery.js" %}></script> -->
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script src={% static "js/bootstrap.min.js" %}></script>
+<!-- <script src="http://code.jquery.com/jquery.min.js"></script> -->
 <script type="text/javascript" src={% static "js/moment.js"%}></script>
 <script type="text/javascript" src={% static "bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js" %}></script>
 
@@ -136,6 +139,33 @@ $('#oneway').change(function(){
         }
     });
 
+$('#inputDeparture').keyup(function(){
+    var query;
+    query = $(this).val();
+    $.get('autoSuggest/', {suggestion: query}, function(suggestions){
+        var parsed = JSON.parse(suggestions);
+
+        place_names = [];
+        for (i = 0; i < parsed.length; i++) {
+            place_names[i] = parsed[i].PlaceId;
+        }
+     $('#inputDeparture').autocomplete({source: place_names});
+    });
+});
+
+$('#inputArrival').keyup(function(){
+    var query;
+    query = $(this).val();
+    $.get('autoSuggest/', {suggestion: query}, function(suggestions){
+        var parsed = JSON.parse(suggestions);
+
+        place_names = [];
+        for (i = 0; i < parsed.length; i++) {
+            place_names[i] = parsed[i].PlaceId;
+        }
+     $('#inputArrival').autocomplete({source: place_names});
+    });
+});
 
 </script>
 
