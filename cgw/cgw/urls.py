@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^poll/$', polltable),
     url(r'^group/([^/]+)/$', pollview),
     url(r'^submitform/$', submit),
-    url(r'', search)
+    url(r'', search),
+	url(r'^suggest_category/$', views.autoSuggest, name='suggest_category')
 )
