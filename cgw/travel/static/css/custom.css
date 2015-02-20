@@ -18,13 +18,17 @@ body {
     background-image: url("greyzz.png");
 }
 
-
+body, html{
+  margin:0;
+  padding:0;
+}
 h3 {
 	font-family: 'Roboto Condensed', sans-serif;
 }
 
 
 
-#logo {
+.logo {
 	background-color: #34363D;
+	width: 100%;
 }
