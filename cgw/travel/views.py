@@ -9,6 +9,7 @@ from django.template import RequestContext
 from travel.models import Group, Person, Quote, Flight
 from travel.fetch_query import saveQuery
 from datetime import datetime
+from cgw.skyscanner_query import AutoSuggestQuery
 
 # Create your views here.
 
@@ -75,3 +76,11 @@ def submit(request):
     salt = object.doQuery()
     return HttpResponseRedirect("/group/" + salt + "/") 
     #return HttpResponse("hello")
+
+def autoSuggest(request):
+	#GET autoSuggest
+	dict = request.GET
+	query = dict['input']
+	results = AutoSuggestQuery(query_string=query).getClosest(5)
+	#RETURN RESULTS
+	return HttpResponse(results)
