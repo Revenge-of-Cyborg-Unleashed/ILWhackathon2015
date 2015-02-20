@@ -208,12 +208,13 @@ class LivePriceQuery(SkyscannerQuery):
 
 class AutoSuggestQuery(SkyscannerQuery):
 
-    def __init__(self, market, currency, locale, query_string):
+    def __init__(self, query_string, market='UK', currency='GBP', locale='en-GB'):
 
         super().__init__(market, currency, locale)
         self.query_string = query_string
 
         self.results = self.makeQuery()
+        print("ASQ received query: " + query_string)
 
     def makeQuery(self):
 
@@ -223,6 +224,7 @@ class AutoSuggestQuery(SkyscannerQuery):
                       self.query_string, self.api_key)
 
         response = requests.get(url)
+
         return response.json()
 
     def getClosest(self, n=1):
@@ -233,3 +235,9 @@ class AutoSuggestQuery(SkyscannerQuery):
             closest_suggestions.append(suggestion)
 
         return closest_suggestions
+
+# asq = AutoSuggestQuery('edi').getClosest(5)
+# print(asq)
+
+bcq = BrowseCacheQuery('UK', 'GBP', 'en-GB', 'EDI-sky', destination_place='NBO-sky')
+print(bcq.getCheapest(5))

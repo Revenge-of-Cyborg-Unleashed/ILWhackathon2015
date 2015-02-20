@@ -13,7 +13,11 @@
     <script src={% static "js/bootstrap.min.js" %}></script>
     <script type="text/javascript" src={% static "js/moment.js"%}></script>
     <script type="text/javascript" src={% static "bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js" %}></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+
 </head>
+
 
  <div class="logo container-fluid">
    <div class="logo row">
@@ -142,7 +146,35 @@ $('#oneway').change(function(){
             alert('Please enter both a name and an email address')
         }
     });
-	
+
+$('#inputDeparture').keyup(function(){
+    var query;
+    query = $(this).val();
+    $.get('autoSuggest/', {suggestion: query}, function(suggestions){
+        var parsed = JSON.parse(suggestions);
+
+        place_names = [];
+        for (i = 0; i < parsed.length; i++) {
+            place_names[i] = parsed[i].PlaceId;
+        }
+     $('#inputDeparture').autocomplete({source: place_names});
+    });
+});
+
+$('#inputArrival').keyup(function(){
+    var query;
+    query = $(this).val();
+    $.get('autoSuggest/', {suggestion: query}, function(suggestions){
+        var parsed = JSON.parse(suggestions);
+
+        place_names = [];
+        for (i = 0; i < parsed.length; i++) {
+            place_names[i] = parsed[i].PlaceId;
+        }
+     $('#inputArrival').autocomplete({source: place_names});
+    });
+});
+
 </script>
 
 

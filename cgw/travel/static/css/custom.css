@@ -10,6 +10,12 @@
 	border-radius: 20px;
 }
 
+.ui-autocomplete
+{
+	position:absolute;
+	cursor:default;
+	z-index:4000 !important
+}
 #namesdrop {
 	margin-bottom: 10px;
 }
@@ -27,8 +33,8 @@ h3 {
 }
 
 
-
 .logo {
 	background-color: #34363D;
 	width: 100%;
 }
+

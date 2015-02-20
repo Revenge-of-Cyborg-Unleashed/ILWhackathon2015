@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from travel.views import search, polltable, pollview, submit
+from travel.views import search, polltable, pollview, submit, autoSuggest
 
 urlpatterns = patterns('',
     # Examples:
@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^poll/$', polltable),
     url(r'^group/([^/]+)/$', pollview),
     url(r'^submitform/$', submit),
+    url(r'^autoSuggest/$', autoSuggest),
     url(r'', search)
 )
