@@ -48,7 +48,10 @@ def submit(request):
     converted_date = date.replace("/", "-")
     outbound_partial_date = converted_date
     print (converted_date)
-    date = dict['returndate']
+    if 'returndate' in dict:
+        date = dict['returndate']
+    else:
+        date = None
     #converted_date = date[6:] + "-" + date[3:5] + "-" + date[:2]
     converted_date = date.replace("/", "-")
     inbound_partial_date = converted_date

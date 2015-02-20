@@ -2,7 +2,8 @@
 
 /*moves form down */
 .mainbit {
-	padding-top: 100px;
+	padding-top: 50px;
+
 }
 
 .rounded-edges {
@@ -15,3 +16,18 @@
 	cursor:default;
 	z-index:4000 !important
 }
+#namesdrop {
+	margin-bottom: 10px;
+}
+
+body {
+    background-image: url("greyzz.png");
+}
+
+
+h3 {
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#logo {
+	background-color: #34363D;
