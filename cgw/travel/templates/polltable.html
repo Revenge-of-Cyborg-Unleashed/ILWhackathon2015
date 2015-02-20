@@ -28,7 +28,7 @@
         <div class = "col-xs-12">
             <select class = form-control>
                 {% for person in people%}
-                    <option value="{{person.name}}">{{person.name}}</option>
+                    <option value="{{person.name}}">{{person.name}}, {{person.email}}</option>
                 {% endfor %}
             </select>
             
@@ -52,21 +52,10 @@
                 <div class = "col-xs-12">
                     <table class = "table" width = "100%" border="1" id = "pollTable" rules = "rows" frame = "hsides">                 
                             <tr>
-                                <td><strong>Depart From: {{flight.out_origin}}</td>
+                                <td><strong>Depart From:</strong> {{flight.out_origin}}</td>
                             <tr>
-                            <tr>
-                                <td><strong>To: {{flight.out_destination}}</td>
-                            </tr>
-                            <tr>
-                                                        </tr>
-                            <tr>
-                                <td><strong>Return From: </strong> {{flight.in_origin}}</td>
-                            </tr>
                             <tr>
                                 <td><strong>To:</strong> {{flight.out_destination}}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Return Date:</strong> {{flight.ret_date.date}}</td>
                             </tr>
                             <tr>
                                 <td><strong>Departure Date:</strong>  
@@ -75,6 +64,21 @@
                                         {%else%}
                                             {{flight.dep_date.date}}
                                         {%endif%} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Return From: </strong> {{flight.in_origin}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>To:</strong> {{flight.in_destination}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Return Date:</strong>
+                                        {% if flight.ret_date == None %}
+                                            Unavailable
+                                        {%else%}
+                                            {{flight.ret_date.date}}
+                                        {%endif%}
                                 </td>
                             </tr>
                             <tr>
